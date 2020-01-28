@@ -8,7 +8,6 @@
 
 #import "LSIStopWatch.h"
 
-
 @interface LSIStopWatch ()
 
 @property (nonatomic, readwrite, getter=isRunning) BOOL running;
