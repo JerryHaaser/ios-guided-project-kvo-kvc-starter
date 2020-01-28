@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LSIEmployee.h"
 
-NS_ASSUME_NONNULL_BEGIN
+//@interface LSIEmployee ()
+//@property (nonatomic, copy) NSString *privateName;
+//@end
 
 @interface LSIEmployee : NSObject
 
@@ -18,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+

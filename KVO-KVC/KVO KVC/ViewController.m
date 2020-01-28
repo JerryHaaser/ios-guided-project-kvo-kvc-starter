@@ -67,7 +67,69 @@
     
     NSLog(@"%@", self.hrController);
     
+    //Key Value Coding: KVC
+    // * Core Data
+    // * Cocoa Bindings (UI + Model = SwiftUI)
     
+    // @property NSString *name;
+    
+    //1. Accessor for a property
+    // - (NSString *)name;
+    //2. Setter for a property
+    // - (void)setName:(NSString *)name
+    //3. Instance variable to set
+    
+    // Modify our Data using the self.name syntax (not _name)
+    //1. init/dealloc always use: _name =
+    //2. Normal methods always use: self.name =
+    
+    // property accessor (method call or the property dot syntax)
+    NSString *name = [craig name];
+    NSLog(@"Name: %@", name);
+    
+    // Dynamic method call - look up methods and call them via a NSString name
+    
+//    NSString *name2 = [craig valueForKey:@"name"]
+//    NSLog(@"Name2: %@", name2);
+    
+    //    NSString *name2 = [craig valueForKey:@"name"];
+    //    NSString *name2 = [craig valueForKey:@"firstName"]; // No build issues, CRASHES at runtime!
+        NSString *name2 = [craig valueForKey:@"privateName"]; // No build issues, accesses a private property
+        NSLog(@"Name2: %@", name2);
+    
+    [craig setValue:@"Bob" forKey:@"name"];
+    NSLog(@"Name Change: %@", craig.name);
+    
+    // Spelling is very important when using keys
+    // Types must match or it'll crash
+    
+    // Collections and KeyPaths
+    
+//    NSLog(@"Departments1: %@", [[self hrController] departments]);
+//    NSLog(@"Departments2: %@", self.hrController.departments);
+    
+    // keypath: departments
+    
+    NSLog(@"Departments3: %@", [self.hrController valueForKey:@"departments"]);
+    
+    
+    NSLog(@"Department Name: %@", [self.hrController valueForKeyPath:@"departments.name"]);
+    NSLog(@"Department Employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+    
+    
+    // Collection Operators
+    
+    // Goal: [Employee]
+    // @distinctUnionOfArrays = unique values
+    NSLog(@"Department Employees: %@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
+    
+    NSArray<LSIEmployee *> *allEmployees = [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
+    NSLog(@"Department Employees: %@", allEmployees);
+    
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"salary"]);
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@max.salary"]);
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@min.salary"]);
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@avg.salary"]);
 }
 
 
